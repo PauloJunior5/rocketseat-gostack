@@ -28,6 +28,16 @@ app.use(express.json());
 
 const projects = [];
 
+function logRequest(request, response){
+    const {method, url} = request;
+
+    const logLabel = `[${method.toUpperCase()}] ${url}`;
+
+    console.log(logLabel);
+}
+
+app.use(logRequest);
+
 app.get('/', (request, response) => {
     return response.json({
         message: "Hello World!",

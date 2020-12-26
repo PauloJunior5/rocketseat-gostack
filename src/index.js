@@ -1,5 +1,6 @@
+const { request, response } = require('express');
 const express = require('express');
-const {uuid} = require('uuidv4');
+const {uuid, isUuid} = require('uuidv4');
 const app = express();
 app.use(express.json());
 
@@ -28,15 +29,32 @@ app.use(express.json());
 
 const projects = [];
 
-function logRequest(request, response){
+function logRequest(request, response, next){
     const {method, url} = request;
 
     const logLabel = `[${method.toUpperCase()}] ${url}`;
 
     console.log(logLabel);
+
+    return next(); //Próximo middlewere.
+}
+
+function validateProjectId(request, response, next) {
+    const {id} = request.params;
+
+    console.log(id);
+
+    if (!isUuid(id)) {
+        return response.status(400).json({
+            error: 'Invalid Project id!',
+        })
+    }
+
+    return next();
 }
 
 app.use(logRequest);
+app.use('/projects/:id', validateProjectId);
 
 app.get('/', (request, response) => {
     return response.json({

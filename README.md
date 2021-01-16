@@ -1,2 +1,3 @@
 # rocketseat-gostack
-O GoStack é um treinamento online prático e imersivo que ensina do zero ao deploy todo o ecossistema da stack NodeJS, ReactJS e React Native
+GoStack is a practical and immersive online training that teaches from scratch when deploying the entire NodeJS, ReactJS and React Native stack ecosystem.
+
